@@ -19,4 +19,10 @@ pub mod utils {
         let client = crate::client::get_client();
         client.utils().is_steam_running_on_steam_deck()
     }
+
+    #[napi]
+    pub fn is_overlay_enabled() -> bool {
+        let client = crate::client::get_client();
+        client.utils().is_overlay_enabled()
+    }
 }

@@ -55,7 +55,8 @@ export namespace callback {
     P2PSessionRequest = 6,
     P2PSessionConnectFail = 7,
     GameLobbyJoinRequested = 8,
-    MicroTxnAuthorizationResponse = 9
+    MicroTxnAuthorizationResponse = 9,
+    GameOverlayActivated = 10
   }
   export function register<C extends keyof import('./callbacks').CallbackReturns>(steamCallback: C, handler: (value: import('./callbacks').CallbackReturns[C]) => void): Handle
   export class Handle {
@@ -80,11 +81,12 @@ export namespace input {
     x: number
     y: number
   }
-  export function init(): void
+  export function init(): boolean
   export function getControllers(): Array<Controller>
   export function getActionSet(actionSetName: string): bigint
   export function getDigitalAction(actionName: string): bigint
   export function getAnalogAction(actionName: string): bigint
+  export function setInputActionManifestFilePath(path: string): boolean
   export function shutdown(): void
   export class Controller {
     activateActionSet(actionSetHandle: bigint): void
@@ -199,6 +201,7 @@ export namespace utils {
   export function getAppId(): number
   export function getServerRealTime(): number
   export function isSteamRunningOnSteamDeck(): boolean
+  export function isOverlayEnabled(): boolean
 }
 export namespace workshop {
   export interface UgcResult {

@@ -48,9 +48,9 @@ pub mod input {
     }
 
     #[napi]
-    pub fn init() {
+    pub fn init() -> bool {
         let client = crate::client::get_client();
-        client.input().init(false)
+        return client.input().init(false)
     }
 
     #[napi]
@@ -82,6 +82,12 @@ pub mod input {
     pub fn get_analog_action(action_name: String) -> BigInt {
         let client = crate::client::get_client();
         BigInt::from(client.input().get_analog_action_handle(&action_name))
+    }
+
+    #[napi]
+    pub fn set_input_action_manifest_file_path(path: String) -> bool {
+        let client = crate::client::get_client();
+        client.input().set_input_action_manifest_file_path(&path)
     }
 
     #[napi]
